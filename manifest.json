@@ -1,0 +1,38 @@
+{
+  "name": "Mahendra Solar Energy",
+  "short_name": "Mahendra Solar",
+  "description": "Tata Power Solar · Authorised Sub Dealer of Godara Irrigation · Balotra, Rajasthan",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#020818",
+  "theme_color": "#061233",
+  "lang": "en",
+  "categories": ["business", "utilities", "energy"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch with Mahendra Solar",
+      "url": "/index.html#contact",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
+    }
+  ],
+  "prefer_related_applications": false
+}

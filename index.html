@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Mahendra Solar Energy</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Theme & Status Bar -->
+  <meta name="theme-color" content="#061233">
+  <meta name="msapplication-navbutton-color" content="#061233">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- iOS PWA Support -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Mahendra Solar">
+  <link rel="apple-touch-icon" href="icon.svg">
+
+  <!-- SEO & Description -->
+  <meta name="description" content="Mahendra Solar Energy — Tata Power Solar & Godara Irrigation Authorised Sub Dealer. Balotra, Rajasthan.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Mahendra Solar">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Mahendra Solar Energy">
+  <meta property="og:description" content="Tata Power Solar · Balotra, Rajasthan">
+  <meta property="og:image" content="icon.svg">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+  <canvas id="vibCanvas"></canvas>
+
+  <!-- ══════════════════════════════════
+       OTP LOGIN SCREEN
+  ══════════════════════════════════ -->
+  <div id="otpScreen">
+    <div class="otp-brand">
+      <div class="otp-sun">☀️</div>
+      <h1>Mahendra Solar</h1>
+      <p>Enter your 4-digit access code</p>
+    </div>
+
+    <div class="wire-row" id="wireRow" data-sheet="">
+      <!-- Slot 0 -->
+      <div class="wire-wrap" data-index="0">
+        <div class="wire">
+          <span data-wire="top"></span>
+          <span data-wire="left"></span>
+          <span data-wire="right"></span>
+          <span data-wire="bottom"></span>
+        </div>
+        <label class="slot">
+          <input class="otp-input" inputmode="numeric" autocomplete="one-time-code" maxlength="1" pattern="[0-9]">
+          <span class="slot_win"></span>
+        </label>
+      </div>
+
+      <!-- Slot 1 -->
+      <div class="wire-wrap" data-index="1">
+        <div class="wire">
+          <span data-wire="top"></span>
+          <span data-wire="left"></span>
+          <span data-wire="right"></span>
+          <span data-wire="bottom"></span>
+        </div>
+        <label class="slot">
+          <input class="otp-input" inputmode="numeric" maxlength="1" pattern="[0-9]">
+          <span class="slot_win"></span>
+        </label>
+      </div>
+
+      <!-- Slot 2 -->
+      <div class="wire-wrap" data-index="2">
+        <div class="wire">
+          <span data-wire="top"></span>
+          <span data-wire="left"></span>
+          <span data-wire="right"></span>
+          <span data-wire="bottom"></span>
+        </div>
+        <label class="slot">
+          <input class="otp-input" inputmode="numeric" maxlength="1" pattern="[0-9]">
+          <span class="slot_win"></span>
+        </label>
+      </div>
+
+      <!-- Slot 3 -->
+      <div class="wire-wrap" data-index="3">
+        <div class="wire">
+          <span data-wire="top"></span>
+          <span data-wire="left"></span>
+          <span data-wire="right"></span>
+          <span data-wire="bottom"></span>
+        </div>
+        <label class="slot">
+          <input class="otp-input" inputmode="numeric" maxlength="1" pattern="[0-9]">
+          <span class="slot_win"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="otp-hint">Demo code: <span id="demoCode" class="otp-code-reveal"></span></div>
+    <div class="otp-err" id="otpErr">Incorrect code — try again</div>
+    <div class="otp-ok"  id="otpOk">✓ Circuit closed. Welcome!</div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       MAIN APP
+  ══════════════════════════════════ -->
+  <div id="mainApp">
+
+    <nav id="appNav">
+      <div class="nav-logo">Mahendra Solar Energy</div>
+      <ul class="nav-links">
+        <li><a onclick="goTo('contact')">About</a></li>
+        <li><a onclick="goTo('contact')">Contact</a></li>
+      </ul>
+      <button id="installBtn" class="install-btn" onclick="installApp()" style="display:none">
+        ⬇ Install App
+      </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="badge-row">
+          <div class="badge">☀️ Powered by Tata Power Solar</div>
+          <div class="badge">💧 Authorised Sub Dealer of Godara Irrigation</div>
+        </div>
+        <h1>
+          <span class="g1">Solar Energy</span><br>
+          <span class="g2">Redefined</span>
+        </h1>
+        <p>Transform your space with sustainable solar solutions. Reliable energy, lower costs, and a cleaner future — powered by cutting-edge technology.</p>
+        <div class="stats-row">
+          <div class="stat"><div class="stat-num" data-target="8000">0</div><div class="stat-lbl">Installations</div></div>
+          <div class="stat"><div class="stat-num" data-target="15">0</div><div class="stat-lbl">Years Experience</div></div>
+          <div class="stat"><div class="stat-num" data-target="25">0</div><div class="stat-lbl">Year Warranty</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLAR ELEMENTS -->
+    <section class="solar-strip">
+      <div class="strip-title">Live Solar Elements</div>
+      <div class="solar-grid">
+        <div class="sol-card" onclick="vibCard(this)">
+          <div class="live-dot"></div>
+          <canvas class="sol-canvas" data-type="panel"></canvas>
+          <h3>Solar Panel</h3>
+          <p>Monocrystalline 22% efficiency with anti-reflective coating.</p>
+        </div>
+        <div class="sol-card" onclick="vibCard(this)">
+          <div class="live-dot"></div>
+          <canvas class="sol-canvas" data-type="inverter"></canvas>
+          <h3>Smart Inverter</h3>
+          <p>MPPT inverters with real-time grid synchronisation.</p>
+        </div>
+        <div class="sol-card" onclick="vibCard(this)">
+          <div class="live-dot"></div>
+          <canvas class="sol-canvas" data-type="battery"></canvas>
+          <h3>Battery Storage</h3>
+          <p>Lithium-ion systems for 24/7 uninterrupted solar power.</p>
+        </div>
+        <div class="sol-card" onclick="vibCard(this)">
+          <div class="live-dot"></div>
+          <canvas class="sol-canvas" data-type="sun"></canvas>
+          <h3>Sun Tracker</h3>
+          <p>Dual-axis tracking boosts energy harvest by up to 40%.</p>
+        </div>
+        <div class="sol-card" onclick="vibCard(this)">
+          <div class="live-dot"></div>
+          <canvas class="sol-canvas" data-type="monitor"></canvas>
+          <h3>Live Monitor</h3>
+          <p>IoT dashboard showing real-time watts, savings, CO₂ offset.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="section-hd">
+        <h2>Get In <span class="grad">Touch</span></h2>
+        <p>Ready to switch to solar? Connect with our team today.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="info-col">
+          <div class="info-card">
+            <h4>📞 Call Us</h4>
+            <p>Speak with our solar experts.</p>
+            <a href="tel:9783616900" class="phone-link">+91 9783616900</a>
+            <a href="tel:9414634422" class="phone-link">+91 9414634422</a>
+          </div>
+          <div class="info-card">
+            <h4>📍 Location</h4>
+            <p>Balotra, Rajasthan</p>
+            <p class="sub-text">India's Premier Solar Hub</p>
+            <a href="https://maps.app.goo.gl/UEsxALMgvkZcvvUy9?g_st=ac"
+               target="_blank" rel="noopener noreferrer" class="map-btn">
+              View on Google Maps →
+            </a>
+          </div>
+          <div class="info-card">
+            <h4>🕐 Working Hours</h4>
+            <p><strong class="hl">Mon – Sat:</strong> 9:00 AM – 6:00 PM</p>
+            <p class="closed"><strong>Sunday: Closed</strong></p>
+          </div>
+        </div>
+
+        <div class="form-box">
+          <h3>Send a Message</h3>
+          <form id="contactForm" onsubmit="sendMsg(event)">
+            <div class="f-group">
+              <label>Full Name</label>
+              <input type="text" id="fn" placeholder="Your full name" required>
+            </div>
+            <div class="f-group">
+              <label>Email Address</label>
+              <input type="email" id="fe" placeholder="your@email.com" required>
+            </div>
+            <div class="f-group">
+              <label>Phone Number</label>
+              <input type="tel" id="fp" placeholder="+91 9xxx xxx xxx" required>
+            </div>
+            <div class="f-group">
+              <label>Message</label>
+              <textarea id="fm" placeholder="Tell us about your solar needs..." required></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send Message</button>
+            <div class="form-status" id="formStatus"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p><span class="grad">Mahendra Solar Energy</span> · Powered by Tata Power Solar</p>
+      <p class="footer-sub">© 2026 All rights reserved · Balotra, Rajasthan</p>
+    </footer>
+
+  </div><!-- /#mainApp -->
+
+  <script src="app.js"></script>
+
+  <!-- PWA Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('SW registered:', reg.scope))
+          .catch(err => console.log('SW registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>
